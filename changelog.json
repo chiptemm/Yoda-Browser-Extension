@@ -1,0 +1,109 @@
+{
+  "versions": [
+    {
+      "version": "1.8.2",
+      "changes": [
+        "First-run setup screen: enter your internal API base URL before using the extension",
+        "All API endpoints are derived from the configured base URL — nothing hardcoded in source",
+        "Config stored in chrome.storage.local; ⚙ Config button in header lets you change it anytime",
+        "'Use demo data only' option skips setup for offline/testing use",
+        "background.js service worker also reads base URL from storage dynamically"
+      ]
+    },
+    {
+      "version": "1.8.1",
+      "changes": [
+        "Update banner appears below tabs when a newer version is available with reload instructions",
+        "Version badge pulses when an update is detected",
+        "Update check throttled to once per hour; result cached in storage to avoid redundant network calls",
+        "Dismiss button hides the banner for the current session"
+      ]
+    },
+    {
+      "version": "1.8.0",
+      "changes": [
+        "Light/dark mode toggle added to the header toolbar",
+        "Theme preference persists across sessions via chrome.storage.local",
+        "Light theme uses a clean off-white palette with blue accent, optimized for readability",
+        "All UI surfaces, tables, modals, and overlays fully themed"
+      ]
+    },
+    {
+      "version": "1.7.7",
+      "changes": [
+        "Query tab key input now has type-ahead from all loaded key names across all sources",
+        "Suggestions update automatically as domains and async data (Plans, Settings) finish loading"
+      ]
+    },
+    {
+      "version": "1.7.6",
+      "changes": [
+        "New Query tab: search across all loaded domains by key name and/or value",
+        "Key conditions: contains / equals",
+        "Value conditions: contains / equals / is true / is false / any",
+        "Results sorted diffs-first then alphabetically, with diff highlighting",
+        "Cells matching the value condition are outlined for quick scanning",
+        "Searches all sources: Basic, Features, Advanced, Plans, Add-ons, Settings"
+      ]
+    },
+    {
+      "version": "1.7.5",
+      "changes": [
+        "Settings section added to Compare table \u2014 fetches settings_dashboard API",
+        "Nested hierarchy: key_level (DOMAIN/DC/POD/DEFAULT) \u2192 prefix group \u2192 field rows",
+        "Settings section collapsed by default (may contain hundreds of rows)",
+        "Settings filter pill added to Compare toolbar",
+        "Search auto-expands and highlights within nested settings rows"
+      ]
+    },
+    {
+      "version": "1.7.4",
+      "changes": [
+        "401 errors now show 'Not logged in' warning instead of 'Domain not found'",
+        "Login flash message uses amber styling and stays visible for 6 seconds",
+        "HTTP status code passed through from background service worker for accurate error classification"
+      ]
+    },
+    {
+      "version": "1.7.3",
+      "changes": [
+        "Show Keys toggle: display backend field keys inline below human-readable labels",
+        "Search highlights backend key matches when Show Keys is active",
+        "Show Keys applies to both Compare and Domain Versions tables"
+      ]
+    },
+    {
+      "version": "1.7.2",
+      "changes": [
+        "Differences Only replaced with independent toggle on Compare and Domain Versions tabs",
+        "Diff badges and global count hidden during field search to avoid confusion",
+        "Dynamic export filename: EgnyteYodaCompare-[domains].csv",
+        "Release notes modal powered by changelog.json"
+      ]
+    },
+    {
+      "version": "1.7.1",
+      "changes": [
+        "Fixed race condition causing valid domains to show 'Domain not found' error",
+        "Restored missing ensurePlansData function",
+        "Removed ~400 lines of dead Plans card/matrix CSS"
+      ]
+    },
+    {
+      "version": "1.7.0",
+      "changes": [
+        "Plans & Add-ons integrated as sections in the Compare table",
+        "New Plans and Add-ons filter pills in compare toolbar",
+        "Cross-domain plan comparison with diff highlighting"
+      ]
+    },
+    {
+      "version": "1.6.0",
+      "changes": [
+        "Dark terminal UI with IBM Plex fonts",
+        "Accordion sections, live field search, version tracking",
+        "Bulk import, CSV export, full-tab mode"
+      ]
+    }
+  ]
+}
