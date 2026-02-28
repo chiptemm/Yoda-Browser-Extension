@@ -1,6 +1,12 @@
 {
   "versions": [
     {
+      "version": "1.8.5",
+      "changes": [
+        "Fix version number display"
+      ]
+    },
+    {
       "version": "1.8.4",
       "changes": [
         "Icon filenames corrected to match manifest references (icon-16.png etc.)",

@@ -1596,13 +1596,24 @@ document.getElementById('export-btn').addEventListener('click', function() {
 function loadReleaseNotes() {
   var body = document.getElementById('relnotes-body');
   if (!body || body.dataset.loaded) return;
+  var installedVersion = (chrome && chrome.runtime && chrome.runtime.getManifest)
+    ? chrome.runtime.getManifest().version : null;
   fetch(chrome.runtime.getURL ? chrome.runtime.getURL('changelog.json') : 'changelog.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      body.innerHTML = data.versions.map(function(v, i) {
-        var isCurrent = i === 0;
+      body.innerHTML = data.versions.map(function(v) {
+        // Mark the entry that matches the installed manifest version as current.
+        // Falls back to the top entry if no version matches (e.g. in dev/demo mode).
+        var isCurrent = installedVersion
+          ? v.version === installedVersion
+          : v === data.versions[0];
+        var isNewer = installedVersion && v.version !== installedVersion
+          && isNewerVersion(v.version, installedVersion);
+        var label = isCurrent ? ' — installed' : (isNewer ? ' — update available' : '');
+        var cls   = isCurrent ? '' : (isNewer ? '' : ' older');
+        var style = isNewer ? ' style="color:var(--accent);"' : '';
         return '<div class="relnotes-entry">' +
-          '<div class="relnotes-version' + (isCurrent ? '' : ' older') + '">v' + v.version + (isCurrent ? ' — current' : '') + '</div>' +
+          '<div class="relnotes-version' + cls + '"' + style + '>v' + v.version + label + '</div>' +
           '<div class="relnotes-items">' +
           v.changes.map(function(c) { return '<div class="relnotes-item">' + c + '</div>'; }).join('') +
           '</div></div>';
@@ -1615,7 +1626,20 @@ function loadReleaseNotes() {
     });
 }
 
+function isNewerVersion(a, b) {
+  // Returns true if version string a is newer than b
+  var av = a.split('.').map(Number), bv = b.split('.').map(Number);
+  for (var i = 0; i < Math.max(av.length, bv.length); i++) {
+    if ((av[i]||0) > (bv[i]||0)) return true;
+    if ((av[i]||0) < (bv[i]||0)) return false;
+  }
+  return false;
+}
+
 document.getElementById('relnotes-btn') && document.getElementById('relnotes-btn').addEventListener('click', function() {
+  // Always re-render so installed/newer labels reflect current state
+  var body = document.getElementById('relnotes-body');
+  if (body) delete body.dataset.loaded;
   loadReleaseNotes();
   document.getElementById('relnotes-overlay').classList.add('open');
 });
@@ -1694,15 +1718,23 @@ function isNewer(remote, local) {
 }
 
 function showUpdateBanner(remoteVersion) {
-  var banner  = document.getElementById('update-banner');
-  var verEl   = document.getElementById('update-banner-version');
-  var notesEl = document.getElementById('update-banner-notes');
-  var btn     = document.getElementById('relnotes-btn');
+  var banner   = document.getElementById('update-banner');
+  var verEl    = document.getElementById('update-banner-version');
+  var notesEl  = document.getElementById('update-banner-notes');
+  var btn      = document.getElementById('relnotes-btn');
   if (!banner) return;
+
+  var installedVersion = (chrome && chrome.runtime && chrome.runtime.getManifest)
+    ? chrome.runtime.getManifest().version : '?';
 
   if (verEl)   verEl.textContent = 'v' + remoteVersion;
   if (notesEl) notesEl.href = GITHUB_REPO_URL + '/releases';
-  if (btn)     btn.classList.add('update-available');
+  if (btn) {
+    btn.classList.add('update-available');
+    // Show installed → available so it's clear what's on disk vs what's on GitHub
+    btn.textContent = 'v' + installedVersion + ' → v' + remoteVersion;
+    btn.title = 'Update available — click for release notes';
+  }
 
   banner.classList.add('visible');
 }
@@ -1710,6 +1742,15 @@ function showUpdateBanner(remoteVersion) {
 document.getElementById('update-dismiss') && document.getElementById('update-dismiss').addEventListener('click', function() {
   var banner = document.getElementById('update-banner');
   if (banner) banner.classList.remove('visible');
+  // Restore badge to just the installed version
+  var btn = document.getElementById('relnotes-btn');
+  if (btn) {
+    var installed = (chrome && chrome.runtime && chrome.runtime.getManifest)
+      ? chrome.runtime.getManifest().version : '?';
+    btn.classList.remove('update-available');
+    btn.textContent = 'v' + installed;
+    btn.title = 'Release notes';
+  }
 });
 
 // Clicking "What's new" in the banner also opens the release notes modal
