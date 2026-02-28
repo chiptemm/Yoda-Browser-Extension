@@ -1,6 +1,13 @@
 {
   "versions": [
     {
+      "version": "1.8.3",
+      "changes": [
+        "Fix extension icons",
+	"Add update button to pull new changes from Git"
+      ]
+    },
+ {
       "version": "1.8.2",
       "changes": [
         "First-run setup screen: enter your internal API base URL before using the extension",
@@ -10,6 +17,7 @@
         "background.js service worker also reads base URL from storage dynamically"
       ]
     },
+
     {
       "version": "1.8.1",
       "changes": [
