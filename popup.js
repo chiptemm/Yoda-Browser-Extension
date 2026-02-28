@@ -1,7 +1,8 @@
 /**
  * Egnyte Yoda - main UI logic
- * Version: 1.8.2
+ * Version: 1.8.3
  *
+ * v1.8.3 - Fix extension icons; README update
  * v1.8.2 - First-run setup screen for configurable API base URL
  * v1.8.1 - Auto-update check against GitHub on startup
  * v1.8.0 - Light/dark mode toggle with persistent preference
