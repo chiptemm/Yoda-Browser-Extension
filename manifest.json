@@ -16,20 +16,20 @@
     "default_popup": "popup.html",
     "default_title": "Egnyte Domain Intel",
     "default_icon": {
-      "16": "icon-16.png",
-      "32": "icon-32.png",
-      "48": "icon-48.png",
-      "128": "icon-128.png"
+      "16": "icon-16.jpg",
+      "32": "icon-32.jpg",
+      "48": "icon-48.jpg",
+      "128": "icon-128.jpg"
     }
   },
   "background": {
     "service_worker": "background.js"
   },
   "icons": {
-    "16": "icon-16.png",
-    "32": "icon-32.png",
-    "48": "icon-48.png",
-    "128": "icon-128.png"
+    "16": "icon-16.jpg",
+    "32": "icon-32.jpg",
+    "48": "icon-48.jpg",
+    "128": "icon-128.jpg"
   },
   "web_accessible_resources": [
     {

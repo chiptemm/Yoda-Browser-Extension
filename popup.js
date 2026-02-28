@@ -149,10 +149,12 @@ document.getElementById('setup-url-input') && document.getElementById('setup-url
 document.getElementById('reset-config-btn') && document.getElementById('reset-config-btn').addEventListener('click', async function() {
   var current = await getApiBase();
   var input = document.getElementById('setup-url-input');
-  if (input && current && current !== 'demo') input.value = current;
-  if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-    chrome.storage.local.remove(CONFIG_KEY);
+  if (input) {
+    input.value = (current && current !== 'demo') ? current : '';
+    input.classList.remove('error');
   }
+  var errorEl = document.getElementById('setup-error');
+  if (errorEl) errorEl.classList.remove('visible');
   var setupOverlay = document.getElementById('setup-overlay');
   if (setupOverlay) setupOverlay.classList.add('open');
 });
