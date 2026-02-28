@@ -1618,6 +1618,45 @@ var style = document.createElement('style');
 style.textContent = '.domain-col-link { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 6px; width: 100%; } .domain-col-link:hover { color: var(--accent); text-decoration: underline; }';
 document.head.appendChild(style);
 
+// ─── Manual "Check for Updates" button ───
+document.getElementById('check-update-btn') && document.getElementById('check-update-btn').addEventListener('click', async function() {
+  var btn = this;
+  btn.disabled = true;
+  btn.textContent = '↻ Checking…';
+  btn.classList.remove('uptodate');
+
+  try {
+    var res = await fetch(GITHUB_CHANGELOG_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var data = await res.json();
+    var remoteVersion = data.versions && data.versions[0] && data.versions[0].version;
+    if (!remoteVersion) throw new Error('No version in response');
+
+    var localVersion = chrome && chrome.runtime && chrome.runtime.getManifest
+      ? chrome.runtime.getManifest().version : '0';
+
+    await storageSet('update-last-check', Date.now());
+    await storageSet('update-remote-version', remoteVersion);
+
+    if (isNewer(remoteVersion, localVersion)) {
+      showUpdateBanner(remoteVersion);
+      btn.textContent = '↻ Updates';
+    } else {
+      btn.classList.add('uptodate');
+      btn.textContent = '✓ Up to date';
+      setTimeout(function() {
+        btn.textContent = '↻ Updates';
+        btn.classList.remove('uptodate');
+      }, 3000);
+    }
+  } catch (e) {
+    btn.textContent = '↻ Updates';
+    console.warn('Yoda manual update check failed:', e.message);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
 // ─── Auto-update check ───
 // Fetches changelog.json from the GitHub repo's raw URL and compares versions.
 // Replace GITHUB_RAW_URL with the actual raw URL to your changelog.json, e.g.:
