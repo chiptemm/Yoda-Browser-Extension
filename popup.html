@@ -985,6 +985,21 @@
   }
   .relnotes-btn:hover { border-color: var(--accent); color: var(--accent); }
 
+  .check-update-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 4px;
+    padding: 5px 9px;
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 1;
+    transition: all 0.15s;
+  }
+  .check-update-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .check-update-btn:disabled { opacity: 0.55; cursor: default; }
+  .check-update-btn.uptodate { border-color: var(--success); color: var(--success); }
+
   .relnotes-overlay {
     position: fixed;
     inset: 0;
@@ -1283,7 +1298,7 @@
 
 <header>
   <div class="logo">
-    <div class="logo-icon"><img src="data:image/jpeg;base64," alt="Egnyte" /></div>
+    <div class="logo-icon"><img src="icon-128.png" alt="Egnyte" /></div>
     <div>
       <div class="logo-text">EGNYTE YODA</div>
     </div>
@@ -1295,6 +1310,7 @@
     </button>
     <button class="theme-toggle-btn" id="reset-config-btn" title="Reset API base URL" style="display:none;">⚙ Config</button>
     <button class="relnotes-btn" id="relnotes-btn" title="Release notes">v1.8.2</button>
+    <button class="check-update-btn" id="check-update-btn" title="Check for updates">↻ Updates</button>
     <button class="btn btn-ghost" id="bulk-import-btn" title="Bulk import domains">⊕ Bulk Import</button>
     <button class="btn btn-ghost" id="export-btn" title="Export comparison">↓ Export</button>
     <button class="btn btn-accent btn-icon" id="open-tab-btn" title="Open in full tab">⤢</button>
@@ -1496,7 +1512,7 @@
 <div class="setup-overlay" id="setup-overlay">
   <div class="setup-card">
     <div class="setup-logo">
-      <div class="logo-icon"><img src="data:image/jpeg;base64," alt="" /></div>
+      <div class="logo-icon"><img src="icon-128.png" alt="" /></div>
       <div class="setup-title">EGNYTE YODA — Setup</div>
     </div>
     <div class="setup-sub">
