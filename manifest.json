@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Egnyte Yoda",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "description": "Egnyte domain configuration intelligence - compare and track changes across domains",
   "permissions": [
     "storage",

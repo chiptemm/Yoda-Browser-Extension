@@ -1,6 +1,6 @@
 # Egnyte Yoda 🌿
 
-**Version 1.8.3**
+**Version 1.8.4**
 
 A Chrome extension for Egnyte Sales Engineers and Customer Success Managers to fetch, compare, and track configuration data across multiple Egnyte customer domains — all from a single interface.
 

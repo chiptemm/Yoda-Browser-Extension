@@ -3,6 +3,7 @@
   Egnyte Yoda - extension UI shell
   Version: 1.8.0
 
+  v1.8.4 - Fix icons, dynamic version badge, improved update UX
   v1.8.3 - Fix extension icons; README update
   v1.8.1 - Auto-update check against GitHub on startup
   v1.7.7 - Added Diffs Only toggle switch to Compare and Domain Versions toolbars
@@ -1309,7 +1310,7 @@
       <span class="theme-label" id="theme-label">Light</span>
     </button>
     <button class="theme-toggle-btn" id="reset-config-btn" title="Reset API base URL" style="display:none;">⚙ Config</button>
-    <button class="relnotes-btn" id="relnotes-btn" title="Release notes">v1.8.3</button>
+    <button class="relnotes-btn" id="relnotes-btn" title="Release notes">…</button>
     <button class="check-update-btn" id="check-update-btn" title="Check for updates">↻ Updates</button>
     <button class="btn btn-ghost" id="bulk-import-btn" title="Bulk import domains">⊕ Bulk Import</button>
     <button class="btn btn-ghost" id="export-btn" title="Export comparison">↓ Export</button>
@@ -1330,7 +1331,7 @@
   <span class="update-banner-icon">⬆</span>
   <div class="update-banner-text">
     <strong id="update-banner-version"></strong> is available.
-    <div class="update-banner-steps">chrome://extensions → Egnyte Yoda → click ↻ Reload</div>
+    <div class="update-banner-steps">1. Pull latest from GitHub &nbsp;·&nbsp; 2. chrome://extensions → Egnyte Yoda → ↻ Reload</div>
   </div>
   <div class="update-banner-actions">
     <a id="update-banner-notes" href="#" class="btn btn-accent" style="font-size:10px;padding:4px 8px;text-decoration:none;">What's new</a>

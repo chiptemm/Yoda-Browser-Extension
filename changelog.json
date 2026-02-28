@@ -1,6 +1,15 @@
 {
   "versions": [
     {
+      "version": "1.8.4",
+      "changes": [
+        "Icon filenames corrected to match manifest references (icon-16.png etc.)",
+        "Version badge in header now reads from chrome.runtime.getManifest() — updates automatically after reload",
+        "Update banner instructions clarified: shows git pull step before chrome://extensions reload",
+        "Full README rewrite with features, installation, setup, API endpoints, and dev workflow"
+      ]
+    },
+    {
       "version": "1.8.3",
       "changes": [
         "Fix extension icons",

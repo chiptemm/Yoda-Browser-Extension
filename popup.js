@@ -1,7 +1,8 @@
 /**
  * Egnyte Yoda - main UI logic
- * Version: 1.8.3
+ * Version: 1.8.4
  *
+ * v1.8.4 - Fix icons, dynamic version badge, improved update UX
  * v1.8.3 - Fix extension icons; README update
  * v1.8.2 - First-run setup screen for configurable API base URL
  * v1.8.1 - Auto-update check against GitHub on startup
@@ -398,6 +399,17 @@ var fieldSearchClear = document.getElementById('field-search-clear');
 
 // ─── Color ───
 function colorFor(idx) { return state.colors[idx % state.colors.length]; }
+
+// ─── Version badge ───
+// Always read from the installed manifest so it stays accurate after updates.
+(function() {
+  var btn = document.getElementById('relnotes-btn');
+  if (!btn) return;
+  var version = (chrome && chrome.runtime && chrome.runtime.getManifest)
+    ? chrome.runtime.getManifest().version
+    : '?';
+  btn.textContent = 'v' + version;
+})();
 
 // ─── Flash message ───
 var flashTimer = null;
